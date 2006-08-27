@@ -1,0 +1,45 @@
+--- jbig2enc-0.23/Makefile.orig	2006-08-27 03:10:14.063467000 +0200
++++ jbig2enc-0.23/Makefile	2006-08-27 12:42:01.303536000 +0200
+@@ -4,22 +4,31 @@
+ # For example, a fink MacOSX install:
+ # EXTRA=-I/sw/include/ -I/sw/include/libpng -I/sw/include/libjpeg -L/sw/lib
+ CFLAGS=-I/usr/include/lept -Wall -I/usr/include ${EXTRA}
++bindir=/usr/bin
++libdir=/usr/lib
++includedir=/usr/include
+ 
+-jbig2: libjbig2enc.a jbig2.cc
+-	$(CXX) -o jbig2 jbig2.cc -L. -ljbig2enc -llept $(CFLAGS) -lm
++jbig2: libjbig2enc.la jbig2.cc
++	libtool --mode=link --tag=CXX $(CXX) -o jbig2 jbig2.cc libjbig2enc.la -llept $(CFLAGS) -lm
+ 
+-libjbig2enc.a: jbig2enc.o jbig2arith.o jbig2sym.o
+-	ar -rcv libjbig2enc.a jbig2enc.o jbig2arith.o jbig2sym.o
++libjbig2enc.la: jbig2enc.lo jbig2arith.lo jbig2sym.lo
++	libtool --mode=link --tag=CXX $(CXX) $(LDFLAGS) -o libjbig2enc.la jbig2enc.lo jbig2arith.lo jbig2sym.lo -rpath $(libdir) -llept
+ 
+-jbig2enc.o: jbig2enc.cc jbig2arith.h jbig2sym.h jbig2structs.h jbig2segments.h
+-	$(CXX) -c jbig2enc.cc $(CFLAGS)
+-jbig2arith.o: jbig2arith.cc jbig2arith.h
+-	$(CXX) -c jbig2arith.cc $(CFLAGS)
+-jbig2sym.o: jbig2sym.cc jbig2arith.h
+-	$(CXX) -c jbig2sym.cc -DUSE_EXT $(CFLAGS)
++jbig2enc.lo: jbig2enc.cc jbig2arith.h jbig2sym.h jbig2structs.h jbig2segments.h
++	libtool --mode=compile --tag=CXX $(CXX) -o $@ -c jbig2enc.cc $(CFLAGS)
++jbig2arith.lo: jbig2arith.cc jbig2arith.h
++	libtool --mode=compile --tag=CXX $(CXX) -o $@ -c jbig2arith.cc $(CFLAGS)
++jbig2sym.lo: jbig2sym.cc jbig2arith.h
++	libtool --mode=compile --tag=CXX $(CXX) -o $@ -c jbig2sym.cc -DUSE_EXT $(CFLAGS)
+ 
+ delta: delta.c
+ 	$(CC) -o delta delta.c $(CFLAGS) -llept -lm
+ 
++install: libjbig2enc.la jbig2
++	install -d $(DESTDIR)$(bindir) $(DESTDIR)$(libdir) $(DESTDIR)$(includedir)
++	libtool --mode=install install libjbig2enc.la $(DESTDIR)$(libdir)
++	libtool --mode=install install jbig2 $(DESTDIR)$(bindir)
++	install -m644 jbig2enc.h $(DESTDIR)$(includedir)
++
+ clean:
+-	rm -f *.o jbig2 libjbig2enc.a
++	rm -f *.o jbig2 libjbig2enc.la
