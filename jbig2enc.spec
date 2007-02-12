@@ -1,5 +1,5 @@
 Summary:	JBIG2 encoder
-Summary(pl):	Koder JBIG2
+Summary(pl.UTF-8):   Koder JBIG2
 Name:		jbig2enc
 Version:	0.23
 Release:	1
@@ -19,12 +19,12 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 JBIG2 encoder.
 
-%description -l pl
+%description -l pl.UTF-8
 Koder JBIG2.
 
 %package devel
 Summary:	Development files for jbig2enc library
-Summary(pl):	Pliki nag≥Ûwkowe dla biblioteki jbig2enc
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe dla biblioteki jbig2enc
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	leptonlib-devel >= 1.38
@@ -33,19 +33,19 @@ Requires:	libstdc++-devel
 %description devel
 Development files for jbig2enc library.
 
-%description devel -l pl
-Pliki nag≥Ûwkowe dla biblioteki jbig2enc.
+%description devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe dla biblioteki jbig2enc.
 
 %package static
 Summary:	Static version of jbig2enc library
-Summary(pl):	Statyczna wersja biblioteki jbig2enc
+Summary(pl.UTF-8):   Statyczna wersja biblioteki jbig2enc
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static version of jbig2enc library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna wersja biblioteki jbig2enc.
 
 %prep
