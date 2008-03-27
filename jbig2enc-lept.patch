@@ -4,7 +4,7 @@
 -CC=g++
 +CC=gcc
 +CXX=g++
- LEPTONICA=../leptonlib-1.37
+ LEPTONICA=../leptonlib-1.53
  # For example, a fink MacOSX install:
  # EXTRA=-I/sw/include/ -I/sw/include/libpng -I/sw/include/libjpeg -L/sw/lib
 -CFLAGS=-I${LEPTONICA}/src -Wall -I/usr/include -L/usr/lib -O3 ${EXTRA}
@@ -33,24 +33,3 @@
  
  clean:
  	rm -f *.o jbig2 libjbig2enc.a
---- jbig2enc-0.23/jbig2enc.cc.orig	2006-07-08 05:31:35.000000000 +0200
-+++ jbig2enc-0.23/jbig2enc.cc	2006-08-27 10:47:09.568829500 +0200
-@@ -163,10 +163,14 @@
-   ctx->page_height.push_back(bw->h);
- 
-   if (ctx->refinement) {
--    BOXA *boxes = boxaCopy(ctx->classer->boxas, L_CLONE);
--    ctx->boxes.push_back(boxes);
--    PIXA *comps = pixaCopy(ctx->classer->pixas, L_CLONE);
--    ctx->comps.push_back(comps);
-+    BOXA *boxes;
-+    PIXA *comps;
-+    if (!jbGetComponents(bw, ctx->classer->components,
-+			ctx->classer->maxwidth, ctx->classer->maxheight,
-+			&boxes, &comps)) {
-+      ctx->boxes.push_back(boxes);
-+      ctx->comps.push_back(comps);
-+    }
-   }
- 
-   pixDestroy(&bw);
