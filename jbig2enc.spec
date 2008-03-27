@@ -1,12 +1,12 @@
 Summary:	JBIG2 encoder
 Summary(pl.UTF-8):	Koder JBIG2
 Name:		jbig2enc
-Version:	0.23
-Release:	1
+Version:	0.26
+Release:	0.1
 License:	Apache v2.0
 Group:		Applications/Graphics
 Source0:	http://www.imperialviolet.org/binary/%{name}-%{version}.tar.bz2
-# Source0-md5:	30a9422b0abbcbc98000aa75135f8c39
+# Source0-md5:	19df0344ba2536da5fbbc01ca939d102
 Patch0:		%{name}-lept.patch
 Patch1:		%{name}-shared.patch
 URL:		http://www.imperialviolet.org/jbig2.html
