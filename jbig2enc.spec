@@ -10,10 +10,10 @@ Source0:	http://www.imperialviolet.org/binary/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-lept.patch
 Patch1:		%{name}-shared.patch
 URL:		http://www.imperialviolet.org/jbig2.html
-BuildRequires:	leptonlib-devel >= 1.53
+BuildRequires:	leptonlib-devel >= 1.57
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.5
-Requires:	leptonlib >= 1.53
+Requires:	leptonlib >= 1.57
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -27,7 +27,7 @@ Summary:	Development files for jbig2enc library
 Summary(pl.UTF-8):	Pliki nagłówkowe dla biblioteki jbig2enc
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	leptonlib-devel >= 1.53
+Requires:	leptonlib-devel >= 1.57
 Requires:	libstdc++-devel
 
 %description devel
